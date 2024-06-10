@@ -1,14 +1,28 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { LoginContainerStyled, LoginWrapper, LeftContainer, RightContainer, FormGroup, StyledButton, Title, Subtitle, Input, RightImage, TitleRightContainer } from './LoginStyles';
 import imgLogin from '../../assets/img/login-img/bg-blue.jpg';
+import toast, { Toaster } from 'react-hot-toast';
 
 const Login = () => {
+
+  const errorMessage = () => {
+    toast.error('Error durante el login')
+  }
+
+  const succesMessage = () => {
+    toast.success('Solicitud aprobada')
+  }
+
   const navigate = useNavigate();
 
   const handleLogin = () => {
     navigate('/ajustes');
   };
+
+  useEffect(() => {
+    succesMessage()
+  },[])
 
   return (
     <LoginContainerStyled>
@@ -33,6 +47,7 @@ const Login = () => {
           <RightImage src={imgLogin} alt=''/>
         </RightContainer>
       </LoginWrapper>
+      <Toaster/>
     </LoginContainerStyled>
   );
 };
